@@ -1,0 +1,33 @@
+from sklearn.metrics import r2_score
+import matplotlib.pyplot as plt
+def first_algorithm(x,y,learning_rate):
+    epochs=len(x[0])
+    n=0
+    while n<epochs:
+        for i in range(0,len(x)):
+            w=[0 for i in range(len(x[0]))]
+            errors=[1 for i in range(len(y))]
+            f=np.squeeze(np.dot(w,x[i]),axis=0) 
+            z=0
+            if f>z:
+                yhat=1
+            else:
+                yhat=0        
+            for j in range(len(w)): 
+                w[j]=w[j]+learning_rate*(y[i]-yhat)*(x[i][j])
+            print("weights after",w)
+            n+=1
+        sse=[]
+        for i in range(len(y)):
+            errors[i]=((y[i]-yhat)**2)
+        sse.append(0.5*np.sum(errors))
+        print("COST FUNCTION VALUE",sse)
+        print("Accuracy:",r2_score(errors,y)) 
+        c=[i for i in range(6)]
+        plt.plot(c,errors,color="blue",label="PREDICTED")
+        plt.plot(c,y,color="red",label="ACTUAL")
+        plt.legend()   
+x=x_data
+y=y_data
+learning_rate=0.1
+first_algorithm(x,y,learning_rate)
